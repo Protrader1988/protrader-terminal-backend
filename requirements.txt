@@ -20,7 +20,6 @@ asyncio==3.4.3
 aiofiles==23.2.1
 
 # CORS
-python-cors==1.0.0
 
 # Development
 pytest==7.4.3
