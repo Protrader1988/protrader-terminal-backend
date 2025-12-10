@@ -1,0 +1,46 @@
+services:
+  - type: web
+    name: protrader-backend-web
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app -b 0.0.0.0:$PORT
+    autoDeploy: true
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: ALPACA_API_KEY
+        sync: false
+      - key: ALPACA_SECRET_KEY
+        sync: false
+      - key: ALPACA_BASE_URL
+        value: https://paper-api.alpaca.markets
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_API_SECRET
+        sync: false
+      - key: GEMINI_BASE_URL
+        value: https://api.sandbox.gemini.com
+
+  - type: worker
+    name: protrader-backend-worker
+    env: python
+    plan: starter
+    buildCommand: pip install -r requirements.txt
+    startCommand: python -u workers/paper_trader.py
+    autoDeploy: true
+    envVars:
+      - key: DEMO_ORDER
+        value: "false"
+      - key: ALPACA_API_KEY
+        sync: false
+      - key: ALPACA_SECRET_KEY
+        sync: false
+      - key: ALPACA_BASE_URL
+        value: https://paper-api.alpaca.markets
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: GEMINI_API_SECRET
+        sync: false
+      - key: GEMINI_BASE_URL
+        value: https://api.sandbox.gemini.com

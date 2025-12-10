@@ -1,0 +1,12 @@
+universe:
+  - AAPL
+  - MSFT
+  - ETH/USD
+  - BTC/USD
+
+strategies:
+  - name: wick_master_pro
+    enabled: true
+    params: {}
+    timeframe: 1h
+    paper_qty: 0.001
